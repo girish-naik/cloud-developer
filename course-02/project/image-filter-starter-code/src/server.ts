@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import {filterImageFromURL, deleteLocalFiles, requireAuth} from './util/util';
+import { check, validationResult } from 'express-validator';
+import {Request, Response } from 'express';
 
 (async () => {
 
@@ -30,6 +32,26 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
+  app.get("/filteredimage", 
+  requireAuth,
+  [
+    check('image_url').isURL()
+  ],
+  async (req:Request, res:Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    let {image_url} = req.query;
+    let outputFilePath = await filterImageFromURL(image_url);
+    if (!outputFilePath) {
+      return res.status(500).send({message : "Unknown error while filtering image."});
+    }
+    res.on('finish', function() {
+      deleteLocalFiles([outputFilePath]);
+    });
+    res.status(200).sendFile(outputFilePath);
+  });
   
   // Root Endpoint
   // Displays a simple message to the user
