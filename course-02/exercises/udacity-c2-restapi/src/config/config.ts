@@ -10,7 +10,8 @@ export const config : Config = {
     "auth_jwt_secret": process.env.AUTH_JWT_SECRET,
     "aws_region": process.env.AWS_REGION,
     "aws_profile": process.env.AWS_PROFILE,
-    "aws_media_bucket": process.env.AWS_MEDIA_BUCKET
+    "aws_media_bucket": process.env.AWS_MEDIA_BUCKET,
+    "allowed_frontend_origins": process.env.ALLOWED_FRONTEND_ORIGINS
   },
   "dev": {
   "username": process.env.DEV_SQL_USERNAME,
@@ -23,6 +24,7 @@ export const config : Config = {
     "aws_media_bucket": process.env.AWS_MEDIA_BUCKET,
     "auth_salt": process.env.AUTH_SALT,
     "auth_jwt_secret": process.env.AUTH_JWT_SECRET,
+    "allowed_frontend_origins": process.env.ALLOWED_FRONTEND_ORIGINS
   },
   "prod": {
     "username": process.env.PROD_SQL_USERNAME,
@@ -35,6 +37,7 @@ export const config : Config = {
     "aws_media_bucket": process.env.AWS_MEDIA_BUCKET,
     "auth_salt": process.env.AUTH_SALT,
     "auth_jwt_secret": process.env.AUTH_JWT_SECRET,
+    "allowed_frontend_origins": process.env.ALLOWED_FRONTEND_ORIGINS
   }
 }
 
