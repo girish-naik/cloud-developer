@@ -1,9 +1,8 @@
-export interface TodoItem {
+import { TodoUpdate } from "./TodoUpdate";
+
+export interface TodoItem extends TodoUpdate {
   userId: string
   todoId: string
   createdAt: string
-  name: string
-  dueDate: string
-  done: boolean
   attachmentUrl?: string
 }
